@@ -6,7 +6,7 @@ const { promisify } = require('util')
 const { request, setGlobalDispatcher, MockAgent, Agent } = require('..')
 const { getResponse } = require('../lib/mock/mock-utils')
 const { kClients, kConnected } = require('../lib/core/symbols')
-const { InvalidArgumentError, ClientClosedError } = require('../lib/core/errors')
+const { InvalidArgumentError, ClientClosedError, ClientDestroyedError } = require('../lib/core/errors')
 const MockClient = require('../lib/mock/mock-client')
 const MockPool = require('../lib/mock/mock-pool')
 const { kAgent } = require('../lib/mock/mock-symbols')
@@ -1001,7 +1001,7 @@ test('MockAgent - close removes all registered mock clients', async (t) => {
   try {
     await request(`${baseUrl}/foo`, { method: 'GET' })
   } catch (err) {
-    t.type(err, ClientClosedError)
+    t.type(err, ClientDestroyedError)
   }
 })
 
@@ -1036,7 +1036,7 @@ test('MockAgent - close removes all registered mock pools', async (t) => {
   try {
     await request(`${baseUrl}/foo`, { method: 'GET' })
   } catch (err) {
-    t.type(err, ClientClosedError)
+    t.type(err, ClientDestroyedError)
   }
 })
 

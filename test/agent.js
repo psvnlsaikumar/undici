@@ -66,7 +66,7 @@ test('agent should call callback after closing internal pools', t => {
             t.fail('second request should not resolve')
           })
           .catch(err => {
-            t.type(err, errors.ClientClosedError)
+            t.type(err, errors.ClientDestroyedError)
           })
       })
     })
@@ -115,7 +115,7 @@ test('agent should close internal pools', t => {
           t.fail('second request should not resolve')
         })
         .catch(err => {
-          t.type(err, errors.ClientClosedError)
+          t.type(err, errors.ClientDestroyedError)
         })
     })
   })
